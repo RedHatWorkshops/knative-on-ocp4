@@ -2,7 +2,7 @@
 apiVersion: tekton.dev/v1alpha1
 kind: PipelineResource
 metadata:
-  name: tasks-image
+  name: application-image
 spec:
   type: image
   params:
@@ -17,4 +17,4 @@ spec:
   type: git
   params:
   - name: url
-    value: https://github.com/openshift-cloud-functions/openshift-knative-application
+    value: https://github.com/redhatworkshops/openshift-knative-application
