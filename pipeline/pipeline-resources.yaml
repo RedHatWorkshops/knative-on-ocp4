@@ -1,0 +1,20 @@
+---
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: tasks-image
+spec:
+  type: image
+  params:
+  - name: url
+    value: image-registry.openshift-image-registry.svc:5000/kn-demo/dumpy
+---
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: sourcecode-git
+spec:
+  type: git
+  params:
+  - name: url
+    value: https://github.com/openshift-cloud-functions/openshift-knative-application
