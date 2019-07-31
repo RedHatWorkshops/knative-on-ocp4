@@ -1,12 +1,12 @@
-#  Knative Tutorial
+#  Knative on OCP4 Tutorial
 
 ## Table of Contents
 
-### Installation
-[Installing Knative Serving, Knative Eventing, OpenShift Pipeline and Client tools](./1.InstallKnativeAndTekton.md)
+### Installing Knative Components on OCP4
+* [Installing Knative Serving, Knative Eventing, OpenShift Pipeline and Client tools](./1.InstallKnativeAndTekton.md)
 
 ### OpenShift Pipelines
-[Build an application using OpenShift Pipelines](./2.BuildUsingOpenShiftPipelines.md)
+* [Build an application using OpenShift Pipelines](./2.BuildUsingOpenShiftPipelines.md)
 
 ### Knative Serving
 * [Deploy Serverless Application](./3.DeployServerlessApp.md)
