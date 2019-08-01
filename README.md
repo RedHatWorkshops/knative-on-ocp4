@@ -14,3 +14,4 @@
 
 ### Knative Eventing
 * [Add an Event Source for Direct Delivery](./5.AddingDirectEventSource.md)
+* [Eventing with Channels and Subscriptions](./6.AddingChannelsAndSubscriptions.md)
