@@ -10,7 +10,7 @@
 
 ### Knative Serving
 * [Deploy Serverless Application](./3.DeployServerlessApp.md)
-* [Autoscaling]()
+* [Autoscaling](./4.Autoscaling.md)
 
 ### Knative Eventing
 * [Add an Event Source for Direct Delivery](./5.AddingDirectEventSource.md)
