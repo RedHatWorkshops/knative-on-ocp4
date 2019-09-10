@@ -1,0 +1,233 @@
+
+Cloudevents Failing;
+====================
+
+Hi Ben for my demos today, I stood up a different cluster on AWS with only knative serving and knative eventing running on it. Nothing else was installed.
+
+Veer  18 hours ago
+First time everything went fine when I tested.
+
+Veer  18 hours ago
+Then again when I was demoing I hit the issue  of posting to service
+
+Veer  18 hours ago
+{"level":"error","ts":1568081760.0051727,"logger":"fallback","caller":"cronjobevents/adapter.go:97","msg":"failed to send cloudeventPost http://ch-event-dumpy-channel-xjtzr.kn-demo.svc.cluster.local: dial tcp: lookup ch-event-dumpy-channel-xjtzr.kn-demo.svc.cluster.local: no such host","stacktrace":"github.com/knative/eventing/pkg/adapter/cronjobevents.(*Adapter).cronTick\n\t/go/src/github.com/knative/eventing/pkg/adapter/cronjobevents/adapter.go:97\ngithub.com/knative/eventing/vendor/github.com/robfig/cron.FuncJob.Run\n\t/go/src/github.com/knative/eventing/vendor/github.com/robfig/cron/cron.go:92\ngithub.com/knative/eventing/vendor/github.com/robfig/cron.(*Cron).runWithRecovery\n\t/go/src/github.com/knative/eventing/vendor/github.com/robfig/cron/cron.go:165"}
+
+Veer  18 hours ago
+So this seems to have nothing to do with service mesh installation.
+
+Veer  4 hours ago
+@Ben Browning I have the second cluster intact in case you want to see. The above issue is purely knative.. nothing to do with servicemesh.
+
+Ben Browning  3 hours ago
+@Veer sure - is the cloudevent not posting to your channel the only issue? serving works fine?
+
+Veer  3 hours ago
+yes serving works fine
+
+Veer  3 hours ago
+it is issue with cloudevents not posting both for channels and brokers
+
+Veer  3 hours ago
+@Ben Browning
+
+Ben Browning  3 hours ago
+ok - I'll take a look :slightly_smiling_face:
+
+Veer  3 hours ago
+I have sent you credentials on GoogleChat
+
+Veer  3 hours ago
+@Ben Browning
+
+Ben Browning  3 hours ago
+yep - just logged in there to grab them  :slightly_smiling_face:
+
+Veer  3 hours ago
+thank you
+
+Ben Browning  3 hours ago
+I see a ton of 2019/09/10 17:10:35 failed to send the request: Post http://zipkin.istio-system.svc.cluster.local:9411/api/v2/spans: dial tcp: lookup zipkin.istio-system.svc.cluster.local: no such host in your cronjob pod in the kn-demo namespace...
+
+Ben Browning  3 hours ago
+something is expecting zipkin to exist there?
+
+Veer  3 hours ago
+yeah.. that is harmless
+
+Veer  3 hours ago
+that dumpy app was written for zipkin, but it works without that
+
+Ben Browning  3 hours ago
+so how do I reproduce your issue posting events?
+
+Veer  3 hours ago
+it should be already there in the logs
+
+Veer  3 hours ago
+oh.. it seems to be working now somehow
+
+Ben Browning  3 hours ago
+yeah everything seems to be working
+
+Veer  3 hours ago
+yesterday it failed at the demo and it seems to have fixed itself later
+
+Veer  3 hours ago
+I think if I clean it up and create again, I will start hitting that issue again.
+
+Veer  3 hours ago
+at least for sometime.
+
+Veer  3 hours ago
+those cloudevent posting failures will exist for sometime and will look bad. Should I try to recreate the issue?
+
+Ben Browning  3 hours ago
+sure - if there's a bug here we need to track down what's up
+
+Veer  3 hours ago
+will do
+
+Veer  3 hours ago
+I will ping you back
+
+Ben Browning  3 hours ago
+thanks!
+
+Veer  1 hour ago
+@Ben Browning The issue came back again. You can see it now on the same cluster
+
+Veer  1 hour ago
+$ oc logs -f cronjob-event-dumpy-cronjob-source-l85s6-7cf56577ff-vbjhq
+(edited)
+
+Veer  1 hour ago
+{"level":"error","ts":1568142120.0054426,"logger":"fallback","caller":"cronjobevents/adapter.go:97","msg":"failed to send cloudeventPost http://ch-event-dumpy-channel-rf6mp.kn-demo.svc.cluster.local: dial tcp: lookup ch-event-dumpy-channel-rf6mp.kn-demo.svc.cluster.local: no such host","stacktrace":"github.com/knative/eventing/pkg/adapter/cronjobevents.(*Adapter).cronTick\n\t/go/src/github.com/knative/eventing/pkg/adapter/cronjobevents/adapter.go:97\ngithub.com/knative/eventing/vendor/github.com/robfig/cron.FuncJob.Run\n\t/go/src/github.com/knative/eventing/vendor/github.com/robfig/cron/cron.go:92\ngithub.com/knative/eventing/vendor/github.com/robfig/cron.(*Cron).runWithRecovery\n\t/go/src/github.com/knative/eventing/vendor/github.com/robfig/cron/cron.go:165"}
+
+Ben Browning  1 hour ago
+looking now
+
+Ben Browning  1 hour ago
+Something seems up with your install - I don't see any ClusterChannelProvisioners installed
+
+Ben Browning  45 minutes ago
+This is knative eventing 0.7.1? It seems like somehow eventing and the in-memory-channel are not installed right
+
+Ben Browning  38 minutes ago
+@lberk @matzew either if you may have more input here - something is up with this eventing install and it's not clear to me what it is
+
+Ben Browning  37 minutes ago
+@Veer this is a vanilla knative eventing install via our operator? nothing manually modified here?
+
+Veer  37 minutes ago
+yes
+
+Veer  37 minutes ago
+vanilla install. This is the exact same thing that was working before (edited)
+
+Lukas Berk  36 minutes ago
+reading now
+
+Lukas Berk  36 minutes ago
+https://github.com/openshift/knative-eventing/pull/271 related perhaps?
+
+Veer  34 minutes ago
+@Ben Browning The only thing running on the cluster is knative
+
+Veer  34 minutes ago
+and tekton of course
+
+Veer  34 minutes ago
+I created it for demo yesterday
+
+Veer  32 minutes ago
+One observation - First time it all works fine. Once you delete the app and try to do it again, the problem shows up. I had the same issue on my other cluster. But since we suspected servicemesh, I did set up this separate cluster.
+
+
+
+Ben Browning  32 minutes ago
+how are you deleting the app?
+
+Veer  31 minutes ago
+like here https://github.com/RedHatWorkshops/knative-on-ocp4/blob/master/6.AddingChannelsAndSubscriptions.md#cleanup
+
+Veer  31 minutes ago
+and then oc delete all --all -n kn-demo (edited)
+
+Veer  31 minutes ago
+and then oc delete project kn-demo
+
+Veer  30 minutes ago
+sometimes the project gets stuck in Terminating state for ever. If that happens, I remove the finalizer to clean it up
+
+Ben Browning  22 minutes ago
+that's your problem - oc delete all --all is deleting the clusterchannelprovision
+
+Ben Browning  22 minutes ago
+the change @lberk shared above removes clusterchannelprovisioner from the all category to fix this, but for now you can't do that :smile:
+
+Ben Browning  21 minutes ago
+that's why it works the 1st time and is broken the 2nd
+
+Veer  15 minutes ago
+ah.. so do you have any thoughts on how it fixed itself overnight?
+
+Veer  14 minutes ago
+But wait, I am deleting the project and creating again from scratch (everything)
+
+Ben Browning  14 minutes ago
+that provisioner is a cluster-scoped resource
+
+Veer  13 minutes ago
+oh.. so cluster-scoped resource is getting deleted with delete all  --all ? Then it makes sense on why it doesnt work
+
+Veer  13 minutes ago
+but I am not sure how it fixed itself though
+
+Ben Browning  13 minutes ago
+it fixed itself because the period global resync of the in-memory-channel-controller pod noticed at some point the provisioner was gone and recreated it
+
+Ben Browning  12 minutes ago
+or something did - at least that's my guess
+
+Ben Browning  10 minutes ago
+actually it looks like our eventing operator did that for you
+
+Ben Browning  10 minutes ago
+a bug in our eventing operator would be that it didn't notice immediately you deleted the provisioner - ideally it would notice immediately and recreate it for you :slightly_smiling_face:
+
+Veer  9 minutes ago
+yeah.. operator noticing and adding it back makes sense
+
+Veer  8 minutes ago
+I can confirm looking at the results of oc delete all --all that the clusterchannelprovisioner for in-memory channel was deleted.
+
+Veer  7 minutes ago
+I think if I scale the eventing operator to zero and start it again, it should add it back
+
+Veer  5 minutes ago
+Yep it worked. I had to scale in-memory-channel-controller to  0 and scale it back to 1
+
+Ben Browning  5 minutes ago
+cool
+
+Veer  4 minutes ago
+how did you find what the issue was?
+
+Ben Browning  4 minutes ago
+Well, I saw there was no ClusterChannelProvisioner in your cluster at all
+
+Ben Browning  4 minutes ago
+and there should be 1 for each type of channel you're using
+
+Veer  4 minutes ago
+ok
+
+Ben Browning  3 minutes ago
+so then it was just figuring out what caused it to go away
+
+Veer  3 minutes ago
+what should be there for broker?
+
+Ben Browning  2 minutes ago
+I'm not sure - @lberk do you know what specific broker artifacts to look for to ensure the broker is properly enabled for a namespace?
