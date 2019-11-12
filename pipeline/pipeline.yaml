@@ -29,4 +29,7 @@ spec:
       - build
     params:
     - name: ARGS
-      value: "rollout latest dumpy"
+      value:
+      - rollout
+      - latest
+      - dumpy
