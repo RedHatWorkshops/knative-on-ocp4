@@ -5,6 +5,6 @@ metadata:
 spec:
   schedule: "* * * * *"
   sink:
-    apiVersion: messaging.knative.dev/v1alpha1
-    kind: InMemoryChannel
+    apiVersion: eventing.knative.dev/v1alpha1
+    kind: Channel
     name: ch-event-dumpy
