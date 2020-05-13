@@ -11,7 +11,7 @@ spec:
   tasks:
   - name: build
     taskRef:
-      name: s2i-go
+      name: s2i-quarkus-native
     params:
       - name: TLSVERIFY
         value: "false"
@@ -32,4 +32,4 @@ spec:
       value: 
            - rollout
            - latest
-           - dumpy
+           - msgtxr
