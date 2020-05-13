@@ -1,4 +1,4 @@
----
+--
 apiVersion: tekton.dev/v1alpha1
 kind: PipelineResource
 metadata:
@@ -7,7 +7,7 @@ spec:
   type: image
   params:
   - name: url
-    value: image-registry.openshift-image-registry.svc:5000/kn-demo/dumpy
+    value: image-registry.openshift-image-registry.svc:5000/kn-demo/msgtxr
 ---
 apiVersion: tekton.dev/v1alpha1
 kind: PipelineResource
@@ -17,4 +17,4 @@ spec:
   type: git
   params:
   - name: url
-    value: https://github.com/redhatworkshops/openshift-knative-application
+    value: https://github.com/VeerMuchandi/mesgtxformer
