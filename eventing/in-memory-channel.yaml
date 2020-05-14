@@ -1,4 +1,4 @@
 apiVersion: messaging.knative.dev/v1alpha1
 kind: InMemoryChannel
 metadata:
-  name: ch-event-dumpy
+  name: imc-msgtxr

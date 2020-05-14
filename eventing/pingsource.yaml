@@ -1,11 +1,13 @@
 apiVersion: sources.knative.dev/v1alpha2
 kind: PingSource 
 metadata:
-  name: msgtxr-pingsource-channel
+  name: msgtxr-pingsource
 spec:
   jsonData: This message is from PingSource
   schedule: '* * * * *'
   sink:
-    apiVersion: messaging.knative.dev/v1alpha2
-    kind: InMemoryChannel
-    name: imc-msgtxr 
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: msgtxr-sl
+      namespace: kn-demo

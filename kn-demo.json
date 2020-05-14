@@ -1,0 +1,66 @@
+{
+  "apiVersion": "v1",
+  "kind": "Namespace",
+  "metadata": {
+    "annotations": {
+      "openshift.io/description": "",
+      "openshift.io/display-name": "",
+      "openshift.io/requester": "veer",
+      "openshift.io/sa.scc.mcs": "s0:c29,c4",
+      "openshift.io/sa.scc.supplemental-groups": "1000820000/10000",
+      "openshift.io/sa.scc.uid-range": "1000820000/10000"
+    },
+    "creationTimestamp": "2020-05-06T19:09:27Z",
+    "deletionTimestamp": "2020-05-13T20:29:26Z",
+    "labels": {
+      "knative-eventing-injection": "disabled"
+    },
+    "name": "kn-demo",
+    "resourceVersion": "334037423",
+    "selfLink": "/api/v1/namespaces/kn-demo",
+    "uid": "985011a9-17fa-4614-866c-7e159e830733"
+  },
+  "spec": {
+    "finalizers": []
+  },
+  "status": {
+    "conditions": [
+      {
+        "lastTransitionTime": "2020-05-13T20:29:31Z",
+        "message": "Discovery failed for some groups, 1 failing: unable to retrieve the complete list of server APIs: custom.metrics.k8s.io/v1beta1: the server is currently unable to handle the request",
+        "reason": "DiscoveryFailed",
+        "status": "True",
+        "type": "NamespaceDeletionDiscoveryFailure"
+      },
+      {
+        "lastTransitionTime": "2020-05-13T20:29:34Z",
+        "message": "All legacy kube types successfully parsed",
+        "reason": "ParsedGroupVersions",
+        "status": "False",
+        "type": "NamespaceDeletionGroupVersionParsingFailure"
+      },
+      {
+        "lastTransitionTime": "2020-05-13T20:29:34Z",
+        "message": "All content successfully deleted, may be waiting on finalization",
+        "reason": "ContentDeleted",
+        "status": "False",
+        "type": "NamespaceDeletionContentFailure"
+      },
+      {
+        "lastTransitionTime": "2020-05-13T20:29:34Z",
+        "message": "Some resources are remaining: subscriptions.messaging.knative.dev has 1 resource instances",
+        "reason": "SomeResourcesRemain",
+        "status": "True",
+        "type": "NamespaceContentRemaining"
+      },
+      {
+        "lastTransitionTime": "2020-05-13T20:29:34Z",
+        "message": "Some content in the namespace has finalizers remaining: subscription-controller in 1 resource instances",
+        "reason": "SomeFinalizersRemain",
+        "status": "True",
+        "type": "NamespaceFinalizersRemaining"
+      }
+    ],
+    "phase": "Terminating"
+  }
+}

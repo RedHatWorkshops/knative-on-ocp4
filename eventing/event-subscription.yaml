@@ -1,14 +1,14 @@
 apiVersion: messaging.knative.dev/v1alpha1
 kind: Subscription
 metadata:
-  name: event-dumpy-subscriber 
+  name: msgtxr-subscriber 
 spec:
   channel:
     apiVersion: messaging.knative.dev/v1alpha1
     kind: InMemoryChannel
-    name: ch-event-dumpy
+    name: imc-msgtxr
   subscriber:
     ref:
       apiVersion: serving.knative.dev/v1alpha1
       kind: Service
-      name: dumpy-serverless 
+      name: msgtxr-sl
