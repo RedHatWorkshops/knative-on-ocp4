@@ -18,3 +18,4 @@
 * [Eventing with Channels and Subscriptions](./6.AddingChannelsAndSubscriptions.md)
 * [Eventing with Brokers and Trigger based Subscriptions](./7.UsingBrokersAndTriggers.md)
 * [Configure Kafka Source to receive events from a Kafka Topic](10.KafkaSource.md)
+* [Using API Event Source with KafkaChannel Broker and Trigger](11.BrokerTriggerWithKafka.md)
