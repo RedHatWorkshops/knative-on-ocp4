@@ -11,8 +11,10 @@
 ### Knative Serving
 * [Deploy Serverless Application](./3.DeployServerlessApp.md)
 * [Autoscaling](./4.Autoscaling.md)
+* [Traffic Splitting](5.TrafficSplitting.md)
 
 ### Knative Eventing
 * [Add an Event Source for Direct Delivery](./5.AddingDirectEventSource.md)
 * [Eventing with Channels and Subscriptions](./6.AddingChannelsAndSubscriptions.md)
 * [Eventing with Brokers and Trigger based Subscriptions](./7.UsingBrokersAndTriggers.md)
+* [Configure Kafka Source to receive events from a Kafka Topic](10.KafkaSource.md)
