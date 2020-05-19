@@ -11,7 +11,8 @@
 ### Knative Serving
 * [Deploy Serverless Application](./3.DeployServerlessApp.md)
 * [Autoscaling](./4.Autoscaling.md)
-* [Traffic Splitting](5.TrafficSplitting.md)
+* [Blue Green Deployments](./5.BlueGreen.md)
+* [Traffic Splitting](./6.TrafficSplitting.md)
 
 ### Knative Eventing
 * [Add an Event Source for Direct Delivery](./7.AddingDirectEventSource.md)
