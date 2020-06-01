@@ -3,9 +3,10 @@ kind: KafkaSource
 metadata:
   name: kafka-source
 spec:
-  consumerGroup: knative-group
-  bootstrapServers: my-cluster-kafka-bootstrap.kafka:9092 
-  topics: knative-demo-topic
+  bootstrapServers: 
+   - my-cluster-kafka-bootstrap.kafka:9092 
+  topics: 
+   - knative-demo-topic
   sink:
     ref:
       apiVersion: serving.knative.dev/v1
