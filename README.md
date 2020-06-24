@@ -18,7 +18,13 @@
 * [Add an Event Source for Direct Delivery](./7.AddingDirectEventSource.md)
 * [Eventing with Channels and Subscriptions](./8.AddingChannelsAndSubscriptions.md)
 * [Eventing with Brokers and Trigger based Subscriptions](./9.UsingBrokersAndTriggers.md)
+  
+  <a name="kafka"></a>
   #### Using Kafka with Knative Eventing
 * [Configure Kafka Source to receive events from a Kafka Topic](10.KafkaSource.md)
 * [Eventing with Kafka Channel and Subscription](12.KafkaChannelSubscription.md)
 * [Using API Event Source with KafkaChannel Broker and Trigger](11.BrokerTriggerWithKafka.md)
+
+<a name="awssqs"></a>
+  #### Using AWS SQS as Event Source
+  * [Configure AWS SQS Source as Direct Source for Knative Service ](13.SQSDirectSource.md)
