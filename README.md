@@ -21,10 +21,12 @@
   
   <a name="kafka"></a>
   #### Using Kafka with Knative Eventing
-* [Configure Kafka Source to receive events from a Kafka Topic](10.KafkaSource.md)
-* [Eventing with Kafka Channel and Subscription](12.KafkaChannelSubscription.md)
-* [Using API Event Source with KafkaChannel Broker and Trigger](11.BrokerTriggerWithKafka.md)
+  * [Configure Kafka Source to receive events from a Kafka Topic](10.KafkaSource.md)
+  * [Eventing with Kafka Channel and Subscription](12.KafkaChannelSubscription.md)
+  * [Using API Event Source with KafkaChannel Broker and Trigger](11.BrokerTriggerWithKafka.md)
 
-<a name="awssqs"></a>
-  #### Using AWS SQS as Event Source
+  <a name="awssqs"></a>
+    #### Using AWS SQS as Event Source
+
   * [Configure AWS SQS Source as Direct Source for Knative Service ](13.SQSDirectSource.md)
+  *  [Using AWS SQS Source with Broker and Trigger](14.SQSBrokerTrigger.md)
