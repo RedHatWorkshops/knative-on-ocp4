@@ -1,0 +1,18 @@
+apiVersion: sources.knative.dev/v1alpha1
+kind: CamelSource
+metadata:
+  name: camel-timer-source
+  namespace: kn-demo 
+spec:
+  source:
+    flow:
+      from:
+        uri: 'rest:get:hello'
+        steps:
+          - set-body:
+              constant: Hello World!
+  sink:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: msgtxr-sl
